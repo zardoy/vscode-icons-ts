@@ -1,50 +1,46 @@
 {
-  "name": "vscode-icons-js",
-  "version": "11.6.1",
-  "description": "File specific icons from vscode vscode-icons extension",
+  "name": "vscode-icons-ts",
+  "version": "0.0.0-dev",
+  "description": "Icons extracted from vscode vscode-icons extension for standalone offline usage",
   "main": "dist/Index.js",
   "typings": "dist/Index.d.ts",
   "scripts": {
-    "test": "ts-node ./node_modules/jasmine/bin/jasmine.js test/**/*.test.ts",
-    "test:scripts": "npm run script:extract-data-from-vsi && npm run script:create-icons-data",
-    "script:extract-data-from-vsi": "ts-node ./scripts/extract-data-from-vsi.script.ts",
-    "script:create-icons-data": "ts-node ./scripts/create-icons-data.script.ts",
-    "generate-data": "npm run script:extract-data-from-vsi && npm run script:create-icons-data",
-    "lint": "npm run lint:src",
-    "lint:src": "prettier --write ./src/**/*.{ts,tsx,d.ts}",
+    "test": "vitest --globals",
+    "script:extract-data-from-vsi": "tsx ./scripts/extract-data-from-vsi.script.ts",
+    "script:create-icons-data": "tsx ./scripts/create-icons-data.script.ts",
+    "script:extension-data": "tsx ./scripts/extension-data.ts",
+    "generate-data": "pnpm script:extension-data && pnpm script:extract-data-from-vsi && pnpm script:create-icons-data",
+    "prettier:fix": "prettier --write ./src/**/*.{ts,tsx,d.ts}",
     "dev": "tsc --watch",
     "compile": "tsc",
-    "build": "npm test && npm run generate-data && npm run lint && npm run compile"
+    "build": "pnpm generate-data && pnpm compile && npm test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dderevjanik/vscode-icons-js.git"
-  },
-  "author": {
-    "email": "daniel.derevjanik@gmail.com",
-    "name": "Daniel Derevjanik"
-  },
+  "author": "Vitaly Turovsky <vital2580@icloud.com>",
   "keywords": [
     "typescript",
     "vscode-icons",
     "github-vscode-icons"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dderevjanik/vscode-icons-js/issues"
+  "release": {
+    "initialVersion": {
+      "version": "0.1.0"
+    }
   },
-  "homepage": "https://github.com/dderevjanik/vscode-icons-js#readme",
   "devDependencies": {
+    "@types/jasmine": "^3.6.3",
     "@types/node": "^14.14.27",
     "@types/node-fetch": "^2.5.8",
+    "@types/yauzl": "^2.10.0",
+    "chalk": "^5.2.0",
+    "got": "^12.5.3",
     "jasmine": "^3.6.4",
     "log4js": "^6.3.0",
     "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.5"
-  },
-  "dependencies": {
-    "@types/jasmine": "^3.6.3"
+    "typescript": "^4.1.5",
+    "vitest": "^0.28.5",
+    "yauzl": "^2.10.0"
   }
 }
