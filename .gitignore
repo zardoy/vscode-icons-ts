@@ -2,6 +2,9 @@
 
 # Dist
 dist/
+data/generated
+vscode-icons.zip
+src/generated/*.ts
 
 # Build
 *.js
