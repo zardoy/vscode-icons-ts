@@ -5,14 +5,39 @@ import got from 'got';
 
 import { promisify } from 'util';
 import yauzl from 'yauzl';
+import { exec, spawn } from 'child_process';
 
 const pipeline = promisify(stream.pipeline);
 
 (async () => {
+  let stdout: string = await new Promise((resolve) => {
+    exec('vsce show vscode-icons-team.vscode-icons', (err, stdout) => {
+      if (err) throw err;
+      resolve(stdout);
+    });
+  });
+  stdout = String(stdout);
+  const version = stdout.match(/Version:\s*(.+?)\n/)![1].trim();
   const extZip = './vscode-icons.zip';
+  const downloadUrl = `https://open-vsx.org/api/vscode-icons-team/vscode-icons/${version}/file/vscode-icons-team.vscode-icons-${version}.vsix`;
+  console.log('Download URL', downloadUrl);
   await pipeline(
     got.stream(
-      'https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscode-icons-team/vsextensions/vscode-icons/latest/vspackage'
+      downloadUrl
+      // 'https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscode-icons-team/vsextensions/vscode-icons/12.2.0/vspackage',
+      // {
+      //   headers: {
+      //     'user-agent':
+      //       'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+      //   },
+      // }
+      // 'https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscode-icons-team/vsextensions/vscode-icons/12.2.0/vspackage',
+      // {
+      //   headers: {
+      //     'user-agent':
+      //       'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+      //   },
+      // }
     ),
     fs.createWriteStream(extZip)
   );
