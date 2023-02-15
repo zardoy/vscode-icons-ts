@@ -5,7 +5,7 @@ import got from 'got';
 
 import { promisify } from 'util';
 import yauzl from 'yauzl';
-import { exec, spawn } from 'child_process';
+import { exec } from 'child_process';
 
 const pipeline = promisify(stream.pipeline);
 
@@ -42,7 +42,7 @@ const pipeline = promisify(stream.pipeline);
     fs.createWriteStream(extZip)
   );
   const zipfile = await promisify(yauzl.open as any)(extZip);
-  const iconsPath = './dist/icons';
+  const iconsPath = './build/icons';
   let openReadStream = promisify(zipfile.openReadStream.bind(zipfile));
 
   let extractedIcons = 0;

@@ -1,6 +1,7 @@
 .idea/
 
 # Dist
+build/
 dist/
 data/generated
 vscode-icons.zip

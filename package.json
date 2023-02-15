@@ -2,8 +2,8 @@
   "name": "vscode-icons-ts",
   "version": "0.0.0-dev",
   "description": "Icons extracted from vscode vscode-icons extension for standalone offline usage",
-  "main": "dist/Index.js",
-  "typings": "dist/Index.d.ts",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
   "scripts": {
     "test": "vitest --globals",
     "script:extract-data-from-vsi": "tsx ./scripts/extract-data-from-vsi.script.ts",
@@ -13,7 +13,7 @@
     "prettier:fix": "prettier --write ./src/**/*.{ts,tsx,d.ts}",
     "dev": "tsc --watch",
     "compile": "tsc",
-    "build": "pnpm generate-data && pnpm compile && npm test"
+    "build": "pnpm generate-data && pnpm compile && npm test -- --run"
   },
   "author": "Vitaly Turovsky <vital2580@icloud.com>",
   "keywords": [

@@ -1,4 +1,4 @@
-import { getIconForFile, getIconForFolder, getIconForOpenFolder } from '../src/Index';
+import { getIconForFile, getIconForFolder, getIconForOpenFolder } from '../src/index';
 
 describe('Icons test', () => {
   describe('files', () => {
@@ -12,7 +12,7 @@ describe('Icons test', () => {
         getIconForFile('tsconfig.json'),
         getIconForFile('tsconfig.spec.json'),
         getIconForFile('webpack.base.conf.js'),
-        getIconForFile('.eslintrc.yaml')
+        getIconForFile('.eslintrc.yaml'),
       ]).toEqual([
         'file_type_manifest_bak.svg',
         'file_type_node.svg',
@@ -22,18 +22,15 @@ describe('Icons test', () => {
         'file_type_tsconfig.svg',
         'file_type_tsconfig.svg',
         'file_type_webpack.svg',
-        'file_type_eslint.svg'
+        'file_type_eslint.svg',
       ]);
     });
 
     it('should return icons by special filenames, but defined by vscode langs', () => {
-      expect([
-        getIconForFile('Jenkinsfile'),
-        getIconForFile('guardfile')
-      ]).toEqual([
+      expect([getIconForFile('Jenkinsfile'), getIconForFile('guardfile')]).toEqual([
         'file_type_groovy.svg',
-        'file_type_ruby.svg'
-      ])
+        'file_type_ruby.svg',
+      ]);
     });
 
     it('should return icons by extensions', () => {
@@ -41,20 +38,20 @@ describe('Icons test', () => {
         getIconForFile('All.test.ts'),
         getIconForFile('All.test.tsx'),
         getIconForFile('package.nls.de.json'),
-        getIconForFile('content.js.map')
+        getIconForFile('content.js.map'),
       ]).toEqual([
         'file_type_testts.svg',
         'file_type_testts.svg',
         'file_type_light_json.svg',
-        'file_type_light_jsmap.svg'
+        'file_type_light_jsmap.svg',
       ]);
     });
 
     it('should return icons by languages', () => {
-      expect([getIconForFile('content.js'), getIconForFile('Index.script.ts'), getIconForFile('__main__.py')]).toEqual([
+      expect([getIconForFile('content.js'), getIconForFile('index.script.ts'), getIconForFile('__main__.py')]).toEqual([
         'file_type_light_js.svg',
         'file_type_typescript.svg',
-        'file_type_python.svg'
+        'file_type_python.svg',
       ]);
     });
 
@@ -68,7 +65,7 @@ describe('Icons test', () => {
       expect([getIconForFolder('images'), getIconForFolder('src'), getIconForFolder('locale')]).toEqual([
         'folder_type_images.svg',
         'folder_type_src.svg',
-        'folder_type_locale.svg'
+        'folder_type_locale.svg',
       ]);
     });
 
@@ -76,7 +73,7 @@ describe('Icons test', () => {
       expect([getIconForOpenFolder('images'), getIconForOpenFolder('src'), getIconForOpenFolder('locale')]).toEqual([
         'folder_type_images_opened.svg',
         'folder_type_src_opened.svg',
-        'folder_type_locale_opened.svg'
+        'folder_type_locale_opened.svg',
       ]);
     });
 
