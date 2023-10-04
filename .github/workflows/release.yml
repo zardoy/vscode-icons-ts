@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "14"
-          registry-url: "https://registry.npmjs.org"
       - name: Cache pnpm modules
         uses: actions/cache@v2
         with:
@@ -25,6 +21,10 @@ jobs:
           version: latest
           run_install: |
             args: [--frozen-lockfile, --strict-peer-dependencies]
+      - name: Set publishing config
+        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: pnpx zardoy-release npm
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
