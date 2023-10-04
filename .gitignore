@@ -1,24 +1,30 @@
-.idea/
+# Learn more about paths on https://github.com/github/gitignore/blob/master/Node.gitignore
 
-# Dist
-build/
-dist/
-data/generated
+node_modules
+
+build
+dist
+out
+.next
+.nuxt
+.cache
+
+coverage
+*.lcov
+.nyc_output
+src/generated
 vscode-icons.zip
-src/generated/*.ts
+data/generated
 
-# Build
-*.js
-
-# Maps
-*.js.map
-
-# Logs
 logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+experiment-*
+.DS_Store
+.env.local
+.env.*.local
 
-# Libs
-node_modules
+.vscode-test
+.vscode-test-web
+.eslintcache
+Thumbs.db
+.idea/
